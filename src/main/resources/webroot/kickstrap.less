@@ -1,0 +1,105 @@
+// KICKSTRAP (GetKickstrap.com)
+// ============================
+
+   @import "Kickstrap/extras/head"; // Some snippets we'll need to override Bootstrap
+
+   // APPS
+   // -------
+
+      @apps: "tinygrowl, bootstrap, retina, //bootstrap/transition, //knockout, //updater"; 
+      // Name should match the app's folder name in Kickstrap/apps/.
+
+   // WEBSITE SETTINGS
+   // ----------------
+
+      @rootDir: "/";
+      //Root directory, leave a trailing slash.
+
+      @universalResources: "none"; // EXPERIMENTAL: CDN-Hosted Universal Resources.
+
+   // DEVELOPER SETTINGS
+   // ---------------
+      
+      @import "Kickstrap/extras/console";
+      // Let Kickstrap write to console
+
+      //@import "Kickstrap/extras/caching.less"; 				
+      // Cache Kickstrap (Makes your site faster)
+      // Use "clearCache()" in the console to update.
+
+   // CORE FILES
+   // ----------
+
+      // CSS Reset
+      @import "Kickstrap/bootstrap/less/reset";
+
+      // extras variables and mixins
+      @import "Kickstrap/bootstrap/less/variables";
+      @import "Kickstrap/bootstrap/less/mixins";
+
+      // Grid system and page structure
+      @import "Kickstrap/bootstrap/less/scaffolding";
+      @import "Kickstrap/bootstrap/less/grid";
+      @import "Kickstrap/bootstrap/less/layouts";
+      @import "Kickstrap/extras/olcg";
+
+      // Base CSS
+      @import "Kickstrap/bootstrap/less/type";
+      @import "Kickstrap/bootstrap/less/code";
+      @import "Kickstrap/extras/pretty-print";
+      @import "Kickstrap/bootstrap/less/forms";
+      @import "Kickstrap/bootstrap/less/tables";
+      @import "Kickstrap/extras/horizontal-lists";
+      @import "Kickstrap/extras/sticky-footer";
+
+      // Components: common
+      // @import "Kickstrap/bootstrap/less/sprites.less"; 
+      // @import "Kickstrap/extras/sprites.less"; // Uncomment these two @imports...
+      @import "Kickstrap/extras/icons"; // ...and comment this to revert to regular glyphicons
+      @import "Kickstrap/bootstrap/less/dropdowns";
+      @import "Kickstrap/bootstrap/less/wells";
+      @import "Kickstrap/bootstrap/less/component-animations";
+      @import "Kickstrap/bootstrap/less/close";
+
+      // Components: Buttons & Alerts
+      @import "Kickstrap/bootstrap/less/buttons";
+      @import "Kickstrap/bootstrap/less/button-groups";
+      @import "Kickstrap/bootstrap/less/alerts"; // Note: alerts share common CSS with buttons and thus have styles in buttons.less
+
+      // Components: Nav
+      @import "Kickstrap/bootstrap/less/navs";
+      @import "Kickstrap/bootstrap/less/navbar";
+      @import "Kickstrap/bootstrap/less/breadcrumbs";
+      @import "Kickstrap/bootstrap/less/pagination";
+      @import "Kickstrap/bootstrap/less/pager";
+      @import "Kickstrap/extras/progress";
+
+      // Components: Popovers
+      @import "Kickstrap/bootstrap/less/modals";
+      @import "Kickstrap/bootstrap/less/tooltip";
+      @import "Kickstrap/bootstrap/less/popovers";
+
+      // Components: Misc
+      @import "Kickstrap/bootstrap/less/thumbnails";
+      @import "Kickstrap/bootstrap/less/labels-badges";
+      @import "Kickstrap/bootstrap/less/progress-bars";
+      @import "Kickstrap/bootstrap/less/accordion";
+      @import "Kickstrap/bootstrap/less/carousel";
+      @import "Kickstrap/bootstrap/less/hero-unit";
+      @import "Kickstrap/bootstrap/less/utilities";
+      @import "Kickstrap/bootstrap/less/media";
+      @import "Kickstrap/extras/ks-preview"; // TODO: Move this to the colorschemer app.
+      @import "Kickstrap/extras/retina";
+      
+      // Components: Responsive Media Queries
+	  // @import "Kickstrap/bootstrap/less/responsive-utilities.less";
+	  // @import "Kickstrap/bootstrap/less/responsive-1200px-min.less";
+	  // @import "Kickstrap/bootstrap/less/responsive-768px-979px.less";
+	  // @import "Kickstrap/bootstrap/less/responsive-767px-max.less";
+	  // @import "Kickstrap/bootstrap/less/responsive-navbar.less";
+
+      // Components: Final Kickstrap Overrides
+      
+      @import "theme";
+      
+      @import "Kickstrap/extras/foot";

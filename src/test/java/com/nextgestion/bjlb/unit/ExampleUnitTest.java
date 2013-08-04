@@ -1,6 +1,6 @@
 package com.nextgestion.bjlb.unit;
 
-import com.nextgestion.bjlb.PingVerticle;
+import com.nextgestion.bjlb.main.VertxServer;
 import org.junit.Test;
 
 /*
@@ -22,10 +22,10 @@ import org.junit.Test;
  */
 public class ExampleUnitTest {
 
-  @Test
-  public void testVerticle() {
-    PingVerticle vert = new PingVerticle();
+    @Test
+    public void testVerticle() {
+        VertxServer vert = new VertxServer();
 
-    // do something with verticle
-  }
+        // do something with verticle
+    }
 }
