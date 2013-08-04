@@ -50,20 +50,46 @@
         <article class="row">
             <div class="span3">
             <div class="row">
-                <div class="span11">Auteur</div>
-                <div class="span1">Catégorie</div>
+                <div id="authorName" class="span11">Auteur</div>
+                <div id="category" class="span1">Catégorie</div>
             </div>
             <div class="row">
                 <div class="span6"></div>
-                <div class="span6">Ceci est une super blague !!!!</div>
+                <div id="jokeContent" class="span6">Ceci est une super blague !!!!</div>
             </div>
             <div class="row">
-                <div class="span12">11/02/2013</div>
+                <div id="publicationDate" class="span12">11/02/2013</div>
             </div>
             </div>
             <div class="span9"></div>
         </article>
     </section>
+    
+    <script type="text/javascript">
+    	
+    	var url = "/jokeContent/1";
+    	
+    	$.getJSON(url, function(jokesList) {
+    		
+    		
+    		
+    		$.each(jokesList, function(joke) {
+        		var category = joke.category;
+            	var joke = joke.mainContent;
+            	var authorName = joke.authorName;
+            	var pulicationDate = joke.publicationDate;
+            	
+            	$("#authorName").replaceWith(authorName);
+            	$("#category").replaceWith(category);
+            	$("#jokeContent").replaceWith(joke);
+            	$("#publicationDate").replaceWith(publicationDate);
+            	
+    		})
+    	});
+    	
+    	
+    	
+    </script>
 
     <!--! KICKSTRAP FOOTER -->
     <div class="hidden"><h1>No Stylesheet Loaded</h1>
