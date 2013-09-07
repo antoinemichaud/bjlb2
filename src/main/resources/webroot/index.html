@@ -48,6 +48,9 @@
     </nav>
 
     <section class="container main-container">
+        <nav id="previous_next_navigation" class="row">
+            <a href="#" id="previous">Précédent</a><a href="#" id="next">Suivant</a>
+        </nav>
         <article class="row">
             <div class="span3">
                 <div class="row">
@@ -80,23 +83,42 @@
 </footer>
 <script type="text/javascript">
 
-    var url = "http://localhost:8182/jokeContent/1";
+    var url = "http://localhost:8182/jokeContent/";
+    var date = null;
 
-    $.getJSON(url, function (joke) {
-        var category = joke.category;
-        var jokeContent = joke.mainContent;
-        var authorName = joke.authorName;
-        var publicationDate = joke.publicationDate;
+    getDayJoke();
 
-        $("#authorName>span").replaceWith('<span>' + authorName + '</span>');
-        $("#category>span").replaceWith('<span>' + category + '</span>');
-        $("#jokeContent>span").replaceWith('<span>' + jokeContent + '</span>');
-        $("#publicationDate>span").replaceWith('<span>' + publicationDate + '</span>');
-    });
+    function getDayJoke() {
+        getJokeAtUrl(url + "default");
+    }
+
+    function getJokeOfPreviousDay() {
+        getJokeAtUrl(url + date + "/previous");
+    }
+
+    function getJokeOfNextDay() {
+        getJokeAtUrl(url + date + "/next");
+    }
+
+    function getJokeAtUrl(url) {
+        $.getJSON(url, function (joke) {
+            var category = joke.category;
+            var jokeContent = joke.mainContent;
+            var authorName = joke.authorName;
+            var publicationDate = joke.publicationDate;
+
+            $("#authorName>span").replaceWith('<span>' + authorName + '</span>');
+            $("#category>span").replaceWith('<span>' + category + '</span>');
+            $("#jokeContent>span").replaceWith('<span>' + jokeContent + '</span>');
+            $("#publicationDate>span").replaceWith('<span>' + publicationDate + '</span>');
+        });
+
+    }
+
+    $("#previous").click(getJokeOfPreviousDay());
+    $("#next").click(getJokeOfNextDay());
 
 </script>
-<script src="//ajax.googleapis.com/ajax/libs/jquery/1.8.3/jquery.min.js"></script>
-<script>window.jQuery || document.write('<script src="Kickstrap/js/jquery-1.8.2.min.js"><\/script>');</script>
 <!-- Kickstrap CDN thanks to our friends at netDNA.com -->
 <script id="appList" src="//netdna.getkickstrap.com/1.3/Kickstrap/js/kickstrap.min.js"></script>
 <script>window.consoleLog || document.write('<script id="appList" src="Kickstrap/js/kickstrap.min.js"><\/script>')</script>
@@ -105,8 +127,8 @@
     ks.ready(function () {
         // JavaScript placed here will run only once Kickstrap has loaded successfully.
         $.growl({
-            title: 'Hello World',
-            text: 'To edit this message, find me at the bottom of this HTML file. - Text edited'
+            title: 'Bienvenue !',
+            text: 'Première fois ici ? Donner nous votre avis sur ce site !'
         });
     });
 
