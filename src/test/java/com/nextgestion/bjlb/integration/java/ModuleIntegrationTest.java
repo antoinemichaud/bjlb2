@@ -17,6 +17,7 @@ package com.nextgestion.bjlb.integration.java;
  * @author <a href="http://tfox.org">Tim Fox</a>
  */
 
+import org.junit.Ignore;
 import org.junit.Test;
 import org.vertx.java.core.AsyncResult;
 import org.vertx.java.core.AsyncResultHandler;
@@ -37,6 +38,7 @@ import static org.vertx.testtools.VertxAssert.*;
  *
  * This test demonstrates how to do that.
  */
+@Ignore
 public class ModuleIntegrationTest extends TestVerticle {
 
   @Test
