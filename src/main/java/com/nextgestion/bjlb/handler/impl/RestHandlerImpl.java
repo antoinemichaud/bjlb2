@@ -1,8 +1,6 @@
 package com.nextgestion.bjlb.handler.impl;
 
 import com.nextgestion.bjlb.handler.RestHandler;
-import com.nextgestion.bjlb.model.Joke;
-import com.nextgestion.bjlb.repository.JokesRepository;
 import com.nextgestion.bjlb.service.PageContentService;
 import org.vertx.java.core.MultiMap;
 import org.vertx.java.core.http.HttpServerRequest;
@@ -10,7 +8,7 @@ import org.vertx.java.core.http.HttpServerResponse;
 
 public class RestHandlerImpl implements RestHandler {
 
-    private static final String page = "page";
+    private static final String date = "date";
 
     private final PageContentService pageContentService;
 
@@ -23,10 +21,10 @@ public class RestHandlerImpl implements RestHandler {
 
         final MultiMap params = request.params();
 
-        final String pageNumberStr = params.get(page);
+        final String pageNumberStr = params.get(date);
+        final HttpServerResponse response = request.response();
 
-        if (pageNumberStr != null) {
-            final HttpServerResponse response = request.response();
+        if (!pageNumberStr.isEmpty()) {
             try{
                 final int pageNumber = Integer.parseInt(pageNumberStr);
                 final String pageContent = pageContentService.getPageContent(pageNumber);
@@ -35,9 +33,16 @@ public class RestHandlerImpl implements RestHandler {
             catch (NumberFormatException e) {
                 System.out.println("Probleme dans le format de l'adresse REST");
             }
-            finally {
+        } else {
+            try{
+                final String pageContent = pageContentService.getPageContent();
+                response.end(pageContent);
+            }
+            catch (NumberFormatException e) {
+                System.out.println("Probleme dans le format de l'adresse REST");
             }
         }
+
     }
 
 }
