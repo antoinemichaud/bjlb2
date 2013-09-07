@@ -23,9 +23,7 @@ public class VertxServer extends Verticle {
     @Override
     public void start() {
 
-
         try {
-
             final IRiakClient riakClient = RiakFactory.pbcClient("localhost", 10017);
             final JokesRepository jokesRepository = new JokesRepository(riakClient);
             PageContentService pageContentService = new PageContentService(jokesRepository);
@@ -35,7 +33,7 @@ public class VertxServer extends Verticle {
 
             final RouteMatcher routeMatcher = new RouteMatcher();
 
-            routeMatcher.get("/jokeContent/:page", restHandler);
+            routeMatcher.get("/jokeContent/:date", restHandler);
             routeMatcher.getWithRegEx(".*", staticWebHandler);
 
             vertx.createHttpServer().requestHandler(routeMatcher).listen(PORT_NUMBER);
