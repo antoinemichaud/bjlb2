@@ -7,6 +7,10 @@ public class Joke {
         BAD
     }
 
+    private String previousDate;
+
+    private String nextDate;
+
     private String authorName;
 
     private String authorMail;
@@ -17,7 +21,10 @@ public class Joke {
 
     private String mainContent;
 
-    public Joke(final String authorName, final String authorMail, final Category category, final String publicationDate, final String mainContent) {
+    public Joke(final String previousDate, final String nextDate, String authorName, final String authorMail,
+                final Category category, final String publicationDate, final String mainContent) {
+        this.previousDate = previousDate;
+        this.nextDate = nextDate;
         this.authorName = authorName;
         this.authorMail = authorMail;
         this.category = category;
@@ -63,5 +70,21 @@ public class Joke {
 
     public void setMainContent(final String mainContent) {
         this.mainContent = mainContent;
+    }
+
+    public String getPreviousDate() {
+        return previousDate;
+    }
+
+    public void setPreviousDate(String previousDate) {
+        this.previousDate = previousDate;
+    }
+
+    public String getNextDate() {
+        return nextDate;
+    }
+
+    public void setNextDate(String nextDate) {
+        this.nextDate = nextDate;
     }
 }
