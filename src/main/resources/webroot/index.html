@@ -85,19 +85,17 @@
 
     var url = "http://localhost:8182/jokeContent/";
     var date = null;
+    var previousDate = null;
+    var nextDate = null;
 
     getDayJoke();
 
     function getDayJoke() {
-        getJokeAtUrl(url + "default");
+        getJokeAtUrl(url);
     }
 
-    function getJokeOfPreviousDay() {
-        getJokeAtUrl(url + date + "/previous");
-    }
-
-    function getJokeOfNextDay() {
-        getJokeAtUrl(url + date + "/next");
+    function getJokeOf(date) {
+        getJokeAtUrl(url + date);
     }
 
     function getJokeAtUrl(url) {
@@ -106,6 +104,11 @@
             var jokeContent = joke.mainContent;
             var authorName = joke.authorName;
             var publicationDate = joke.publicationDate;
+            
+//             previousDate = joke.previousDate;
+//             nextDate = joke.nextDate;
+			previousDate = "20130906";
+			
 
             $("#authorName>span").replaceWith('<span>' + authorName + '</span>');
             $("#category>span").replaceWith('<span>' + category + '</span>');
@@ -114,9 +117,15 @@
         });
 
     }
-
-    $("#previous").click(getJokeOfPreviousDay());
-    $("#next").click(getJokeOfNextDay());
+	
+    $("#previous").click(function () {
+    	getJokeOf(previousDate)
+    });
+    
+    $("#next").click(function () {
+    	getJokeOf(nextDate)
+    });
+    
 
 </script>
 <!-- Kickstrap CDN thanks to our friends at netDNA.com -->
