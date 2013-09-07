@@ -24,23 +24,15 @@ public class RestHandlerImpl implements RestHandler {
         final String pageNumberStr = params.get(date);
         final HttpServerResponse response = request.response();
 
-        if (!pageNumberStr.isEmpty()) {
-            try{
-                final int pageNumber = Integer.parseInt(pageNumberStr);
-                final String pageContent = pageContentService.getPageContent(pageNumber);
-                response.end(pageContent);
-            }
-            catch (NumberFormatException e) {
-                System.out.println("Probleme dans le format de l'adresse REST");
-            }
+        if (pageNumberStr.matches("^\\d{8}$")) {
+            final int pageNumber = Integer.parseInt(pageNumberStr);
+            final String pageContent = pageContentService.getPageContent(pageNumber);
+
+            response.end(pageContent);
         } else {
-            try{
-                final String pageContent = pageContentService.getPageContent();
-                response.end(pageContent);
-            }
-            catch (NumberFormatException e) {
-                System.out.println("Probleme dans le format de l'adresse REST");
-            }
+            final String pageContent = pageContentService.getPageContent();
+
+            response.end(pageContent);
         }
 
     }
