@@ -29,7 +29,9 @@ public class JokesRepository {
         try {
             final Bucket bucket = riakClient.fetchBucket(PUBLICATIONS).execute();
             final Publication publication = bucket.fetch("20130804_regular", Publication.class).execute();
-            joke = new Joke(publication.getAuthorName(), publication.getAuthorName(), Joke.Category.BAD, publication.getPublicationDate(), publication.getJokeContent());
+            joke = new Joke(publication.getPreviousJokeDate(), publication.getNextJokeDate(),
+                    publication.getAuthorName(), publication.getAuthorName(), Joke.Category.BAD,
+                    publication.getPublicationDate(), publication.getJokeContent());
         } catch (RiakRetryFailedException e) {
             logger.severe("Erreur lors de la communcation avec le bucket publications");
         }
