@@ -2,6 +2,10 @@ package com.nextgestion.bjlb.storedtype;
 
 public class Publication {
 
+    private String previousJokeDate;
+
+    private String nextJokeDate;
+
     private String authorName;
 
     private String authorMail;
@@ -15,7 +19,9 @@ public class Publication {
     public Publication() {
     }
 
-    public Publication(String authorName, String authorMail, String publicationDate, String category, String jokeContent) {
+    public Publication(String previousJokeDate, String nextJokeDate, String authorName, String authorMail, String publicationDate, String category, String jokeContent) {
+        this.previousJokeDate = previousJokeDate;
+        this.nextJokeDate = nextJokeDate;
         this.authorName = authorName;
         this.authorMail = authorMail;
         this.publicationDate = publicationDate;
@@ -61,5 +67,21 @@ public class Publication {
 
     public void setJokeContent(String jokeContent) {
         this.jokeContent = jokeContent;
+    }
+
+    public String getPreviousJokeDate() {
+        return previousJokeDate;
+    }
+
+    public void setPreviousJokeDate(String previousJokeDate) {
+        this.previousJokeDate = previousJokeDate;
+    }
+
+    public String getNextJokeDate() {
+        return nextJokeDate;
+    }
+
+    public void setNextJokeDate(String nextJokeDate) {
+        this.nextJokeDate = nextJokeDate;
     }
 }
