@@ -1,12 +1,12 @@
 package com.nextgestion.bjlb.service;
 
-import com.fasterxml.jackson.core.JsonProcessingException;
-import com.fasterxml.jackson.databind.ObjectMapper;
-import com.nextgestion.bjlb.model.Joke;
-import com.nextgestion.bjlb.repository.JokesRepository;
+import java.util.logging.Logger;
+
 import org.joda.time.DateTime;
 
-import java.util.logging.Logger;
+import com.fasterxml.jackson.core.JsonProcessingException;
+import com.fasterxml.jackson.databind.ObjectMapper;
+import com.nextgestion.bjlb.repository.JokesRepository;
 
 public class PageContentService {
 
