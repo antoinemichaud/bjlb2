@@ -20,19 +20,16 @@ public class RestHandlerImpl implements RestHandler {
     public void handle(final HttpServerRequest request) {
 
         final MultiMap params = request.params();
-
         final String pageNumberStr = params.get(date);
         final HttpServerResponse response = request.response();
 
         if (pageNumberStr.matches("^\\d{8}$")) {
-//            final int pageNumber = Integer.parseInt(pageNumberStr);
             final String pageContent = pageContentService.getPageContent(pageNumberStr);
             response.end(pageContent);
         } else {
             final String pageContent = pageContentService.getPageContent();
             response.end(pageContent);
         }
-
     }
 
 }
