@@ -1,18 +1,12 @@
 package com.nextgestion.bjlb.repository;
 
+import java.util.logging.Logger;
+
 import com.basho.riak.client.IRiakClient;
-import com.basho.riak.client.IRiakObject;
 import com.basho.riak.client.RiakRetryFailedException;
 import com.basho.riak.client.bucket.Bucket;
-import com.basho.riak.client.bucket.FetchBucket;
-import com.basho.riak.client.operations.FetchObject;
 import com.nextgestion.bjlb.model.Joke;
 import com.nextgestion.bjlb.storedtype.Publication;
-
-import java.text.DateFormat;
-import java.text.SimpleDateFormat;
-import java.util.Date;
-import java.util.logging.Logger;
 
 public class JokesRepository {
 
