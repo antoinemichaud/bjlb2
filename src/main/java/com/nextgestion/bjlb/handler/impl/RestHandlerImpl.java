@@ -25,13 +25,11 @@ public class RestHandlerImpl implements RestHandler {
         final HttpServerResponse response = request.response();
 
         if (pageNumberStr.matches("^\\d{8}$")) {
-            final int pageNumber = Integer.parseInt(pageNumberStr);
-            final String pageContent = pageContentService.getPageContent(pageNumber);
-
+//            final int pageNumber = Integer.parseInt(pageNumberStr);
+            final String pageContent = pageContentService.getPageContent(pageNumberStr);
             response.end(pageContent);
         } else {
             final String pageContent = pageContentService.getPageContent();
-
             response.end(pageContent);
         }
 

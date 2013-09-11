@@ -9,6 +9,9 @@ import com.basho.riak.client.operations.FetchObject;
 import com.nextgestion.bjlb.model.Joke;
 import com.nextgestion.bjlb.storedtype.Publication;
 
+import java.text.DateFormat;
+import java.text.SimpleDateFormat;
+import java.util.Date;
 import java.util.logging.Logger;
 
 public class JokesRepository {
@@ -23,12 +26,14 @@ public class JokesRepository {
         this.riakClient = riakClient;
     }
 
-    public Joke lastJoke() {
+    public Joke findJoke(String date) {
         Joke joke = null;
 
         try {
             final Bucket bucket = riakClient.fetchBucket(PUBLICATIONS).execute();
-            final Publication publication = bucket.fetch("20130804_regular", Publication.class).execute();
+            
+            final String dateStr = date + "_regular";
+            final Publication publication = bucket.fetch(dateStr, Publication.class).execute();
 
             joke = new Joke(publication.getPreviousJokeDate(), publication.getNextJokeDate(),
                     publication.getAuthorName(), publication.getAuthorName(), Joke.Category.BAD,

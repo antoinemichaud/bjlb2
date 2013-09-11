@@ -91,7 +91,7 @@
     getDayJoke();
 
     function getDayJoke() {
-        getJokeAtUrl(url);
+        getJokeAtUrl(url + "default");
     }
 
     function getJokeOf(date) {
@@ -105,10 +105,8 @@
             var authorName = joke.authorName;
             var publicationDate = joke.publicationDate;
             
-//             previousDate = joke.previousDate;
-//             nextDate = joke.nextDate;
-			previousDate = "20130906";
-			
+            previousDate = joke.previousJokeDate;
+            nextDate = joke.nextJokeDate;
 
             $("#authorName>span").replaceWith('<span>' + authorName + '</span>');
             $("#category>span").replaceWith('<span>' + category + '</span>');
