@@ -21,25 +21,21 @@ public class PageContentService {
     }
 
     public String getPageContent(String date) {
-        logger.info("PageContentService.getPageContent value- begin");
         try {
             final String jsonValue = mapper.writeValueAsString(jokesRepository.findJoke(date));
-            logger.info("PageContentService.getPageContent value- end");
 
             return jsonValue;
         } catch (JsonProcessingException e) {
-            logger.info("PageContentService.getPageContent value- end");
+            logger.severe("Erreur lors du parsing du fichier : \n" + e);
             return "Error in the database";
         }
     }
 
     public String getPageContent() {
-        logger.info("PageContentService.getPageContent default- begin");
         final DateTime dateTime = DateTime.now();
         final int formattedIntegerDate = dateTime.getYear() * 10_000 + dateTime.getMonthOfYear() * 100 + dateTime.getDayOfMonth();
 
         final String pageContent = getPageContent(Integer.toString(formattedIntegerDate));
-        logger.info("PageContentService.getPageContent default- end");
         return pageContent;
     }
 }
