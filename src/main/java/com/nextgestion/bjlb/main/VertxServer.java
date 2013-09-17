@@ -5,7 +5,7 @@ import com.basho.riak.client.RiakException;
 import com.basho.riak.client.RiakFactory;
 import com.nextgestion.bjlb.handler.RestHandler;
 import com.nextgestion.bjlb.handler.StaticWebHandler;
-import com.nextgestion.bjlb.handler.impl.RestHandlerImpl;
+import com.nextgestion.bjlb.handler.impl.NavigationRestHandlerImpl;
 import com.nextgestion.bjlb.handler.impl.StaticWebHandlerImpl;
 import com.nextgestion.bjlb.repository.JokesRepository;
 import com.nextgestion.bjlb.service.PageContentService;
@@ -29,7 +29,7 @@ public class VertxServer extends Verticle {
             PageContentService pageContentService = new PageContentService(jokesRepository);
 
             StaticWebHandler staticWebHandler = new StaticWebHandlerImpl();
-            RestHandler restHandler = new RestHandlerImpl(pageContentService);
+            RestHandler restHandler = new NavigationRestHandlerImpl(pageContentService);
 
             final RouteMatcher routeMatcher = new RouteMatcher();
 
