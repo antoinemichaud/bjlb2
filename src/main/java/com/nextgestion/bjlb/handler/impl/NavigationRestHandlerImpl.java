@@ -1,10 +1,11 @@
 package com.nextgestion.bjlb.handler.impl;
 
-import com.nextgestion.bjlb.handler.RestHandler;
-import com.nextgestion.bjlb.service.PageContentService;
 import org.vertx.java.core.MultiMap;
 import org.vertx.java.core.http.HttpServerRequest;
 import org.vertx.java.core.http.HttpServerResponse;
+
+import com.nextgestion.bjlb.handler.RestHandler;
+import com.nextgestion.bjlb.service.PageContentService;
 
 public class NavigationRestHandlerImpl implements RestHandler {
 
@@ -30,6 +31,7 @@ public class NavigationRestHandlerImpl implements RestHandler {
             final String pageContent = pageContentService.getPageContent();
             response.end(pageContent);
         }
+        
     }
 
 }

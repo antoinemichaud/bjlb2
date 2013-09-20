@@ -160,12 +160,12 @@
     	getJokeOf(nextDate)
     });
     
-    function toggle()
+    function toggleResult(message)
     {
     	
     	if ($("#resultAdd").attr("style")=="visibility:hidden;")
     	{
-    		// hidden content, make it visibe
+    		// hidden content, make it visible
     		$("#resultAdd").attr("style", "visibility:visible;");
     	}
     	else
@@ -176,8 +176,20 @@
     }
     
     $("#submitJoke").click(function(){
-    	toggle();
+    	addJokeAtUrl(url + "addingJoke");
     });
+    
+    var adderAuthorName = $("#adderAuthorName");
+    var addedJokeContent = $("#addedJokeContent");
+    var mailAdder = $("#mailAdder");
+    
+    function addJokeAtUrl(addingUrl) {
+    	$.ajax({
+    		url: addingUrl,
+    		type: "PUT",
+    		data: {name: adderAuthorName, content: addedJokeContent, mail: mailAdder}
+    	}).done(toggleResult);
+    }
     
 </script>
 <!-- Kickstrap CDN thanks to our friends at netDNA.com -->

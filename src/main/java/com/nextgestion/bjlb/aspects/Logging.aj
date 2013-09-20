@@ -3,11 +3,11 @@ package com.nextgestion.bjlb.aspects;
 
 import java.util.logging.Logger;
 
+import com.nextgestion.bjlb.main.VertxServer;
+
 public aspect Logging {
 
-    public static final String GLOBAL_LOGGER = "Global Logger";
-
-    private static final Logger logger = Logger.getLogger(GLOBAL_LOGGER);
+    private static final Logger logger = Logger.getLogger(VertxServer.GLOBAL_LOGGER);
 
     private pointcut publicMethodExecuted(): execution(public * com.nextgestion.bjlb.repository.*.*(..)) ||
             execution(public * com.nextgestion.bjlb.service.*.*(..));

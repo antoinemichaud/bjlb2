@@ -1,8 +1,11 @@
 package com.nextgestion.bjlb.repository;
 
 import java.text.DateFormat;
+import java.text.ParseException;
 import java.text.SimpleDateFormat;
+import java.util.Calendar;
 import java.util.Date;
+import java.util.GregorianCalendar;
 import java.util.logging.Logger;
 
 import com.basho.riak.client.IRiakClient;
@@ -37,7 +40,7 @@ public class JokesRepository {
             	return joke;
             }
         } catch (RiakRetryFailedException e) {
-        	logger.severe("Erreur lors de la communcation avec le bucket publications");
+        	logger.severe("Erreur lors de la communication avec le bucket publications");
         } 
         
         // TODO 
@@ -46,8 +49,45 @@ public class JokesRepository {
         final Date defaultDate = new Date();
         final DateFormat dateFormat = new SimpleDateFormat("yyyyMMdd");
         final String defaultDateStr = dateFormat.format(defaultDate);
-        return findJoke(defaultDateStr);
         
+        boolean isDefaultDateIsNotPresent = false;
+        if (!date.equals(defaultDateStr)){
+        	isDefaultDateIsNotPresent = true;
+        } else {
+        	isDefaultDateIsNotPresent = false;
+        }
+        
+        return findDefaultJoke(defaultDateStr, isDefaultDateIsNotPresent);
     }
+    
+    /**
+     * method when we don't have in database the joke of the asked day. And we are even processing
+     * when we don't have the joke of today.
+     * @param dateStr
+     * @param isDefaultDateIsNotPresent
+     * @return
+     */
+	public Joke findDefaultJoke(final String dateStr, final boolean isDefaultDateIsNotPresent) {
+
+		if (isDefaultDateIsNotPresent) {
+			final DateFormat dateFormat = new SimpleDateFormat("yyyyMMdd");
+			Date reverseDate = null;
+			try {
+				reverseDate = dateFormat.parse(dateStr);
+			} catch (ParseException e) {
+				logger.severe("Erreur lors du parsing de notre Date String en Date - findDefaultJoke method");
+			}
+			Calendar calendar = new GregorianCalendar();
+			calendar.setTime(reverseDate);
+			calendar.add(Calendar.DATE, -1);
+			final Date newDate = calendar.getTime();
+			
+			return findJoke(dateFormat.format(newDate));
+		
+		} else {
+			return findJoke(dateStr);
+		}
+
+	}
     
 }

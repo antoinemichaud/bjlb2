@@ -5,6 +5,7 @@ import com.basho.riak.client.RiakException;
 import com.basho.riak.client.RiakFactory;
 import com.nextgestion.bjlb.handler.RestHandler;
 import com.nextgestion.bjlb.handler.StaticWebHandler;
+import com.nextgestion.bjlb.handler.impl.AddingRestHandlerImpl;
 import com.nextgestion.bjlb.handler.impl.NavigationRestHandlerImpl;
 import com.nextgestion.bjlb.handler.impl.StaticWebHandlerImpl;
 import com.nextgestion.bjlb.repository.JokesRepository;
@@ -15,10 +16,12 @@ import org.vertx.java.platform.Verticle;
 import java.util.logging.Logger;
 
 public class VertxServer extends Verticle {
+	
+    public static final String GLOBAL_LOGGER = "Global Logger";
 
 	private static final Integer PORT_NUMBER = 8182;
 
-    private static final Logger logger = Logger.getAnonymousLogger();
+    private static final Logger logger = Logger.getLogger(GLOBAL_LOGGER);
 
     @Override
     public void start() {
@@ -29,17 +32,19 @@ public class VertxServer extends Verticle {
             PageContentService pageContentService = new PageContentService(jokesRepository);
 
             StaticWebHandler staticWebHandler = new StaticWebHandlerImpl();
-            RestHandler restHandler = new NavigationRestHandlerImpl(pageContentService);
+            RestHandler navigationRestHandler = new NavigationRestHandlerImpl(pageContentService);
+            RestHandler addingRestHandler = new AddingRestHandlerImpl();
 
             final RouteMatcher routeMatcher = new RouteMatcher();
 
-            routeMatcher.get("/jokeContent/:date", restHandler);
+            routeMatcher.get("/jokeContent/addingJoke", addingRestHandler);
+            routeMatcher.get("/jokeContent/:date", navigationRestHandler);
             routeMatcher.getWithRegEx(".*", staticWebHandler);
 
             vertx.createHttpServer().requestHandler(routeMatcher).listen(PORT_NUMBER);
 
         } catch (RiakException e) {
-            logger.severe("Impossible de se connecter Ã  la base ");
+            logger.severe("Impossible de se connecter ˆ la base ");
         }
 
     }

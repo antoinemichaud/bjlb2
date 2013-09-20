@@ -31,6 +31,11 @@ public class PageContentService {
         }
     }
 
+    /**
+     * 
+     * method we call when we don't ask with a date so it's when we want the date of today
+     * @return
+     */
     public String getPageContent() {
         final DateTime dateTime = DateTime.now();
         final int formattedIntegerDate = dateTime.getYear() * 10_000 + dateTime.getMonthOfYear() * 100 + dateTime.getDayOfMonth();

@@ -1,28 +1,23 @@
 package com.nextgestion.bjlb.handler.impl;
 
-import com.nextgestion.bjlb.handler.RestHandler;
-import com.nextgestion.bjlb.service.PageContentService;
-import org.vertx.java.core.MultiMap;
+import java.util.logging.Logger;
+
 import org.vertx.java.core.http.HttpServerRequest;
-import org.vertx.java.core.http.HttpServerResponse;
+
+import com.nextgestion.bjlb.handler.RestHandler;
+import com.nextgestion.bjlb.main.VertxServer;
 
 public class AddingRestHandlerImpl implements RestHandler {
 
-    private static final String date = "date";
+    private static final Logger logger = Logger.getLogger(VertxServer.GLOBAL_LOGGER);
 
-    private final PageContentService pageContentService;
-
-    public AddingRestHandlerImpl(final PageContentService pageContentService) {
-        this.pageContentService = pageContentService;
+    public AddingRestHandlerImpl() {
     }
 
     @Override
     public void handle(final HttpServerRequest request) {
-
-        final MultiMap params = request.params();
-        final String pageNumberStr = params.get(date);
-        final HttpServerResponse response = request.response();
-
+       logger.info("youpi on est passe dans le bon handler");
+        request.response().end("success");
     }
 
 }
