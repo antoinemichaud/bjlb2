@@ -44,7 +44,7 @@ public class VertxServer extends Verticle {
             vertx.createHttpServer().requestHandler(routeMatcher).listen(PORT_NUMBER);
 
         } catch (RiakException e) {
-            logger.severe("Impossible de se connecter � la base ");
+            logger.severe("Impossible de se connecter à la base ");
         }
 
     }
