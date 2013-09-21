@@ -24,14 +24,8 @@ public class NavigationRestHandlerImpl implements RestHandler {
         final String pageNumberStr = params.get(date);
         final HttpServerResponse response = request.response();
 
-        if (pageNumberStr.matches("^\\d{8}$")) {
-            final String pageContent = pageContentService.getPageContent(pageNumberStr);
-            response.end(pageContent);
-        } else {
-            final String pageContent = pageContentService.getPageContent();
-            response.end(pageContent);
-        }
-        
+        final String pageContent = pageContentService.getPageContent(pageNumberStr);
+        response.end(pageContent);
     }
 
 }

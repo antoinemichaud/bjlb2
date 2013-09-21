@@ -13,8 +13,9 @@ import java.util.logging.Logger;
 public class PageContentService {
 
     private static final Logger logger = Logger.getAnonymousLogger();
-    public static final String BJLB_DATE_FORMAT = "yyyyMMdd";
-
+    private static final String BJLB_DATE_FORMAT = "yyyyMMdd";
+    private static final DateTimeFormatter FORMATTER = DateTimeFormat.forPattern(BJLB_DATE_FORMAT);
+    
     private static ObjectMapper mapper = new ObjectMapper();
 
     private final JokesRepository jokesRepository;
@@ -23,22 +24,33 @@ public class PageContentService {
         this.jokesRepository = jokesRepository;
     }
 
-    public String getPageContent(String date) {
-        Joke joke = jokesRepository.findJoke(date);
+    public String getPageContentWhenThereIsDate(String dateStr) {
+        final DateTime requestedDateTime = DateTime.parse(dateStr, FORMATTER);
+        
+        if (requestedDateTime.isAfterNow()) {
+        	return "fail"; 
+        }
+        
+        Joke joke = jokesRepository.findJoke(dateStr);
         return formattedJoke(joke);
     }
 
-    public String getPageContent() {
-        final DateTime dateTime = DateTime.now();
-        final int formattedIntegerDate = dateTime.getYear() * 10_000 + dateTime.getMonthOfYear() * 100 + dateTime.getDayOfMonth();
-        final Joke closestJoke = findClosestJoke(Integer.toString(formattedIntegerDate));
+    public String getPageContent(final String pageNumberStr) {
+    	
+    	if (pageNumberStr.matches("^\\d{8}$")) {
+            return getPageContentWhenThereIsDate(pageNumberStr);
+        } else {
+        	final DateTime dateTime = DateTime.now();
+            final int formattedIntegerDate = dateTime.getYear() * 10_000 + dateTime.getMonthOfYear() * 100 + dateTime.getDayOfMonth();
+            final Joke closestJoke = findClosestJoke(Integer.toString(formattedIntegerDate));
 
-        return formattedJoke(closestJoke);
+            return formattedJoke(closestJoke);
+        }
+        
     }
 
     private Joke findClosestJoke(final String dateStr) {
-        final DateTimeFormatter formatter = DateTimeFormat.forPattern(BJLB_DATE_FORMAT);
-        final DateTime requestedDateTime = DateTime.parse(dateStr, formatter);
+        final DateTime requestedDateTime = DateTime.parse(dateStr, FORMATTER);
 
         Joke joke = null;
         int counter = 0;
@@ -55,7 +67,7 @@ public class PageContentService {
         try {
             return mapper.writeValueAsString(joke);
         } catch (JsonProcessingException e) {
-            logger.severe("Erreur lors du parsing du fichier : \n" + e);
+            logger.severe("Erreur lors du parsing de la blague : \n" + e.getMessage());
             return "Error in the database";
         }
     }
