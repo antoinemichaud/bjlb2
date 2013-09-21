@@ -37,18 +37,6 @@ curl -v -i -XPUT http://localhost:10018/riak/publications/20130916_regular -H "C
 
 
 
-
-
-
-
-
-
-
-
-
-
-
-
 curl -v -i -XPUT http://localhost:10018/riak/publications/20130917_regular -H "Content-Type: application/json" -d '{"nextJokeDate":"20130918", "previousJokeDate":"20130916","authorName":"boloss",
 "authorMail":"boloss@jokinette.com", "publicationDate":"08/09/2013", "category":"regular", "jokeContent":"No doubt, this is a really good joke"}'
 
