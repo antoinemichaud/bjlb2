@@ -179,15 +179,15 @@
     	addJokeAtUrl(url + "addingJoke");
     });
     
-    var adderAuthorName = $("#adderAuthorName");
-    var addedJokeContent = $("#addedJokeContent");
-    var mailAdder = $("#mailAdder");
+    var adderAuthorName = $("#adderAuthorName").val();
+    var addedJokeContent = $("#addedJokeContent").val();
+    var mailAdder = $("#mailAdder").val();
     
     function addJokeAtUrl(addingUrl) {
     	$.ajax({
     		url: addingUrl,
     		type: "PUT",
-    		data: {name: adderAuthorName, content: addedJokeContent, mail: mailAdder}
+    		data: {name: adderAuthorName , content: addedJokeContent, mail: mailAdder}
     	}).done(toggleResult);
     }
     

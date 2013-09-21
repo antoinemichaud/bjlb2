@@ -37,14 +37,14 @@ public class VertxServer extends Verticle {
 
             final RouteMatcher routeMatcher = new RouteMatcher();
 
-            routeMatcher.get("/jokeContent/addingJoke", addingRestHandler);
+            routeMatcher.put("/jokeContent/addingJoke", addingRestHandler);
             routeMatcher.get("/jokeContent/:date", navigationRestHandler);
             routeMatcher.getWithRegEx(".*", staticWebHandler);
 
             vertx.createHttpServer().requestHandler(routeMatcher).listen(PORT_NUMBER);
 
         } catch (RiakException e) {
-            logger.severe("Impossible de se connecter ˆ la base ");
+            logger.severe("Impossible de se connecter ï¿½ la base ");
         }
 
     }
